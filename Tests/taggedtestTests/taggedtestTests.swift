@@ -16,12 +16,12 @@ final class taggedtestTests: XCTestCase {
         .where(MyEntity.SQLite.id == 23)
     let firstRow = try! connection.pluck(query)!
     print(firstRow)
-//
-        let intFromDatabase: Int = firstRow[Expression<Int>("id")]
-//    let intFromDatabase: Int = try! firstRow.get(Expression<Int>("id"))
-//    let myEntityIdFromDatabase: MyEntity.Id = MyEntity.Id(rawValue: intFromDatabase)
 
+    let intFromDatabase: Int = firstRow[Expression<Int>("id")]
     XCTAssertEqual(intFromDatabase, myEntity.id.rawValue)
+
+    let idFromDatabase: MyEntity.Id = firstRow[MyEntity.SQLite.id]
+    XCTAssertEqual(idFromDatabase, myEntity.id)
   }
 
   static var allTests = [
